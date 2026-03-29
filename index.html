@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ricky Shah — Senior Mechanical Design Engineer</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --green: #1D9E75;
+    --green-dark: #0F6E56;
+    --green-light: #E1F5EE;
+    --green-mid: #5DCAA5;
+    --ink: #1a1a18;
+    --ink-muted: #5a5a56;
+    --ink-faint: #9a9a94;
+    --bg: #faf9f6;
+    --bg-card: #ffffff;
+    --border: rgba(0,0,0,0.08);
+    --serif: 'Playfair Display', Georgia, serif;
+    --sans: 'DM Sans', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--bg);
+    color: var(--ink);
+    font-size: 16px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.1rem 5vw;
+    background: rgba(250,249,246,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: var(--serif);
+    font-size: 18px;
+    color: var(--ink);
+    text-decoration: none;
+    letter-spacing: -0.01em;
+  }
+  .nav-logo span { color: var(--green); }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    font-size: 13px;
+    text-decoration: none;
+    color: var(--ink-muted);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--green); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex; align-items: center;
+    padding: 8rem 5vw 5rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; top: -10%; right: -5%;
+    width: 55vw; height: 110vh;
+    background: radial-gradient(ellipse at 70% 30%, rgba(29,158,117,0.07) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    max-width: 1100px;
+    width: 100%;
+    margin: 0 auto;
+  }
+  .hero-tag {
+    display: inline-block;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--green-dark);
+    background: var(--green-light);
+    padding: 4px 12px;
+    border-radius: 20px;
+    margin-bottom: 1.25rem;
+  }
+  .hero-name {
+    font-family: var(--serif);
+    font-size: clamp(36px, 5vw, 58px);
+    line-height: 1.12;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.25rem;
+  }
+  .hero-name em { color: var(--green); font-style: italic; }
+  .hero-desc {
+    font-size: 16px;
+    color: var(--ink-muted);
+    max-width: 440px;
+    margin-bottom: 2rem;
+    line-height: 1.8;
+  }
+  .hero-cta {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: var(--green);
+    color: #fff;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 12px 26px;
+    border-radius: 4px;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .hero-cta:hover { background: var(--green-dark); transform: translateY(-1px); }
+  .hero-cta svg { width: 14px; height: 14px; }
+
+  .hero-stats {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  }
+  .stat-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .stat-card:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(0,0,0,0.06); }
+  .stat-card::after {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--green);
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+  .stat-card:hover::after { opacity: 1; }
+  .stat-num {
+    font-family: var(--serif);
+    font-size: 36px;
+    font-weight: 500;
+    color: var(--green);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .stat-label { font-size: 13px; color: var(--ink-muted); }
+  .stat-card.accent {
+    background: var(--green);
+    border-color: var(--green);
+    grid-column: span 2;
+  }
+  .stat-card.accent .stat-num { color: #fff; font-size: 24px; }
+  .stat-card.accent .stat-label { color: rgba(255,255,255,0.75); }
+
+  /* SECTIONS */
+  section { padding: 6rem 5vw; }
+  .section-inner { max-width: 1100px; margin: 0 auto; }
+  .section-header { margin-bottom: 3rem; }
+  .section-kicker {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 8px;
+    display: block;
+  }
+  .section-title {
+    font-family: var(--serif);
+    font-size: clamp(26px, 3vw, 38px);
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+  }
+
+  /* SERVICES */
+  #services { background: #fff; }
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 16px;
+  }
+  .service-card {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.4rem;
+    background: var(--bg);
+    transition: border-color 0.2s, transform 0.2s;
+    position: relative;
+  }
+  .service-card:hover { border-color: var(--green-mid); transform: translateY(-2px); }
+  .service-icon {
+    width: 36px; height: 36px;
+    background: var(--green-light);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 12px;
+  }
+  .service-icon svg { width: 18px; height: 18px; stroke: var(--green-dark); fill: none; stroke-width: 1.5; }
+  .service-name { font-size: 14px; font-weight: 500; margin-bottom: 4px; }
+  .service-desc { font-size: 12px; color: var(--ink-muted); }
+
+  /* PORTFOLIO */
+  #portfolio { background: var(--bg); }
+  .portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+  }
+  .project-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .project-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(0,0,0,0.08); }
+  .project-thumb {
+    height: 180px;
+    background: var(--green-light);
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .project-thumb svg { width: 56px; height: 56px; opacity: 0.35; stroke: var(--green-dark); fill: none; stroke-width: 1; }
+  .project-thumb-label {
+    position: absolute; bottom: 12px; left: 12px;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: var(--green);
+    color: #fff;
+    padding: 3px 9px;
+    border-radius: 20px;
+  }
+  .project-thumb-1 { background: linear-gradient(135deg, #E1F5EE 0%, #9FE1CB 100%); }
+  .project-thumb-2 { background: linear-gradient(135deg, #f0f4ff 0%, #c8d8f8 100%); }
+  .project-thumb-3 { background: linear-gradient(135deg, #fff4e1 0%, #fcd99a 100%); }
+  .project-thumb-4 { background: linear-gradient(135deg, #f5e8ff 0%, #ddb8f5 100%); }
+  .project-thumb-5 { background: linear-gradient(135deg, #e8f5ff 0%, #a8d8f5 100%); }
+  .project-thumb-6 { background: linear-gradient(135deg, #fff0e8 0%, #f5c0a0 100%); }
+  .project-body { padding: 1.25rem; }
+  .project-title { font-size: 15px; font-weight: 500; margin-bottom: 6px; }
+  .project-desc { font-size: 13px; color: var(--ink-muted); line-height: 1.6; }
+
+  /* PRICING */
+  #pricing { background: #fff; }
+  .pricing-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; max-width: 800px; }
+  .pricing-card {
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 2rem;
+    background: var(--bg);
+    position: relative;
+    overflow: hidden;
+  }
+  .pricing-card.featured {
+    background: var(--green);
+    border-color: var(--green);
+  }
+  .pricing-card.featured * { color: #fff !important; }
+  .pricing-card.featured .pricing-feature { border-color: rgba(255,255,255,0.2); }
+  .pricing-badge {
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 20px;
+    display: inline-block;
+    margin-bottom: 1rem;
+    background: var(--green-light);
+    color: var(--green-dark);
+  }
+  .pricing-card.featured .pricing-badge { background: rgba(255,255,255,0.2); color: #fff; }
+  .pricing-name { font-family: var(--serif); font-size: 20px; font-weight: 500; margin-bottom: 0.5rem; }
+  .pricing-price {
+    font-family: var(--serif);
+    font-size: 44px;
+    font-weight: 400;
+    line-height: 1;
+    color: var(--green);
+    margin-bottom: 1.5rem;
+  }
+  .pricing-price sup { font-size: 22px; vertical-align: super; }
+  .pricing-card.featured .pricing-price { color: #fff; }
+  .pricing-features { list-style: none; margin-bottom: 0; }
+  .pricing-feature {
+    font-size: 13px;
+    color: var(--ink-muted);
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; gap: 8px;
+  }
+  .pricing-feature::before {
+    content: '';
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--green);
+    flex-shrink: 0;
+  }
+  .pricing-card.featured .pricing-feature::before { background: rgba(255,255,255,0.6); }
+  .pricing-note { font-size: 12px; color: var(--ink-faint); margin-top: 1rem; }
+
+  /* CONTACT */
+  #contact {
+    background: var(--ink);
+    color: #fff;
+  }
+  #contact .section-kicker { color: var(--green-mid); }
+  #contact .section-title { color: #fff; }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+  .contact-desc { font-size: 16px; color: rgba(255,255,255,0.6); line-height: 1.8; margin-bottom: 2rem; }
+  .contact-email {
+    display: inline-flex; align-items: center; gap: 10px;
+    color: var(--green-mid);
+    font-size: 18px;
+    font-weight: 500;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(93,202,165,0.3);
+    padding-bottom: 4px;
+    transition: color 0.2s;
+  }
+  .contact-email:hover { color: #fff; }
+  .contact-tags { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 2rem; }
+  .contact-tag {
+    font-size: 12px;
+    padding: 5px 14px;
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.12);
+    color: rgba(255,255,255,0.55);
+  }
+  .contact-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 14px;
+    padding: 2rem;
+  }
+  .contact-card-title { font-family: var(--serif); font-size: 20px; margin-bottom: 1rem; }
+  .contact-row {
+    display: flex; align-items: flex-start; gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    font-size: 14px;
+  }
+  .contact-row:last-child { border-bottom: none; }
+  .contact-row-label { color: rgba(255,255,255,0.4); width: 90px; flex-shrink: 0; }
+  .contact-row-val { color: rgba(255,255,255,0.85); }
+
+  /* FOOTER */
+  footer {
+    background: #111;
+    padding: 1.5rem 5vw;
+    display: flex; align-items: center; justify-content: space-between;
+    border-top: 1px solid rgba(255,255,255,0.05);
+  }
+  .footer-copy { font-size: 12px; color: rgba(255,255,255,0.3); }
+  .footer-badge {
+    font-size: 11px;
+    padding: 4px 12px;
+    background: rgba(29,158,117,0.15);
+    color: var(--green-mid);
+    border-radius: 20px;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .hero-tag { animation: fadeUp 0.5s ease both; }
+  .hero-name { animation: fadeUp 0.5s 0.1s ease both; }
+  .hero-desc { animation: fadeUp 0.5s 0.2s ease both; }
+  .hero-cta { animation: fadeUp 0.5s 0.3s ease both; }
+  .hero-stats { animation: fadeUp 0.5s 0.4s ease both; }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    .hero-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .hero-stats { grid-template-columns: 1fr 1fr; }
+    .stat-card.accent { grid-column: span 2; }
+    .nav-links { display: none; }
+    .contact-grid { grid-template-columns: 1fr; }
+    .pricing-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">Ricky <span>Shah</span></a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#portfolio">Portfolio</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-grid">
+    <div>
+      <span class="hero-tag">Certified SOLIDWORKS User · Available for Remote Work</span>
+      <h1 class="hero-name">Senior Mechanical<br><em>Design Engineer</em></h1>
+      <p class="hero-desc">8+ years turning complex engineering challenges into precise, manufacturable designs — for clients across the US, Germany, and Poland.</p>
+      <a class="hero-cta" href="mailto:shahricky845@gmail.com">
+        <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2.5 5.5A1.5 1.5 0 0 1 4 4h12a1.5 1.5 0 0 1 1.5 1.5v9A1.5 1.5 0 0 1 16 16H4a1.5 1.5 0 0 1-1.5-1.5v-9Z" stroke="white" stroke-width="1.5"/><path d="M2.5 6l7.5 5 7.5-5" stroke="white" stroke-width="1.5"/></svg>
+        Get in touch
+      </a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-card">
+        <div class="stat-num">8+</div>
+        <div class="stat-label">Years of experience</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">3</div>
+        <div class="stat-label">Countries served</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">12+</div>
+        <div class="stat-label">Service specialisms</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">SW</div>
+        <div class="stat-label">Certified SOLIDWORKS</div>
+      </div>
+      <div class="stat-card accent">
+        <div class="stat-num">Open to Freelance · Contract · Full-time Remote</div>
+        <div class="stat-label">shahricky845@gmail.com</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="section-inner">
+    <div class="section-header">
+      <span class="section-kicker">What I do</span>
+      <h2 class="section-title">Services &amp; Capabilities</h2>
+    </div>
+    <div class="services-grid">
+
+      <div class="service-card">
+        <div class="service-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div>
+        <div class="service-name">NEMA Enclosures &amp; Electrical Racks</div>
+        <div class="service-desc">US standards compliant design and detailing</div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon"><svg viewBox="0 0 24 24"><ellipse cx="12" cy="17" rx="8" ry="4"/><path d="M4 17V7a8 4 0 0 1 16 0v10"/><path d="M12 13V7"/></svg></div>
+        <div class="service-name">Diesel Tanks &amp; Fuel Systems</div>
+        <div class="service-desc">Functional, code-compliant fuel system designs</div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
+        <div class="service-name">Excavator &amp; Heavy Equipment</div>
+        <div class="service-desc">Complex multi-part mechanical assemblies</div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon"><svg viewBox="0 0 24 24"><path d="M2 20h20M4 20V10l8-6 8 6v10"/><path d="M9 20v-6h6v6"/></svg></div>
+        <div class="service-name">Fabrication Design</div>
+        <div class="service-desc">Weldments, structural frames &amp; sheet metal</div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon"><svg viewBox="0 0 24 24"><path d="M3 21h18M5 21V7l7-4 7 4v14"/><path d="M10 13v8M14 13v8"/></svg></div>
+        <div class="service-name">Staircase Design &amp; Detailing</div>
+        <div class="service-desc">Straight, spiral &amp; custom configurations</div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon"><svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="1"/><path d="M8 5V3M16 5V3"/></svg></div>
+        <div class="service-name">Signboard Structures</div>
+        <div class="service-desc">Structurally sound &amp; design-accurate signage</div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12"/></svg></div>
+        <div class="service-name">Machining Components</div>
+        <div class="service-desc">Toleranced parts ready for manufacturing</div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon"><svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg></div>
+        <div class="service-name">Reverse Engineering</div>
+        <div class="service-desc">Scanned files converted to accurate 3D models</div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg></div>
+        <div class="service-name">Engineering Drawings &amp; Detailing</div>
+        <div class="service-desc">GD&amp;T, BOMs &amp; assembly drawings</div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg></div>
+        <div class="service-name">Millwork Design</div>
+        <div class="service-desc">Custom millwork detailing &amp; shop drawings</div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
+        <div class="service-name">DriveWorks &amp; Automation CAD</div>
+        <div class="service-desc">Rules-based design automation workflows</div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+        <div class="service-name">Estimation &amp; Take-offs</div>
+        <div class="service-desc">Accurate material &amp; cost take-offs</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section id="portfolio">
+  <div class="section-inner">
+    <div class="section-header">
+      <span class="section-kicker">Past Projects</span>
+      <h2 class="section-title">Featured Work</h2>
+    </div>
+    <div class="portfolio-grid">
+
+      <div class="project-card">
+        <div class="project-thumb project-thumb-1">
+          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+          <span class="project-thumb-label">NEMA / Electrical</span>
+        </div>
+        <div class="project-body">
+          <div class="project-title">Industrial NEMA Enclosure Series</div>
+          <div class="project-desc">Full 3D design and fabrication drawings for a series of NEMA 4X enclosures for an electrical client in the US, with sheet metal flat patterns and BOMs.</div>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-thumb project-thumb-2">
+          <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+          <span class="project-thumb-label">Heavy Equipment</span>
+        </div>
+        <div class="project-body">
+          <div class="project-title">Excavator Attachment Assembly</div>
+          <div class="project-desc">Complex multi-component mechanical assembly for a heavy equipment manufacturer in Germany, including full GD&T detailing and weld drawings.</div>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-thumb project-thumb-3">
+          <svg viewBox="0 0 24 24"><ellipse cx="12" cy="17" rx="8" ry="4"/><path d="M4 17V7a8 4 0 0 1 16 0v10"/></svg>
+          <span class="project-thumb-label">Fuel Systems</span>
+        </div>
+        <div class="project-body">
+          <div class="project-title">Diesel Tank &amp; Fuel System</div>
+          <div class="project-desc">Code-compliant diesel fuel tank design with full piping layout, structural mounts, and regulatory documentation for a US-based generator OEM.</div>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-thumb project-thumb-4">
+          <svg viewBox="0 0 24 24"><path d="M3 21h18M5 21V7l7-4 7 4v14"/></svg>
+          <span class="project-thumb-label">Millwork</span>
+        </div>
+        <div class="project-body">
+          <div class="project-title">Custom Millwork Shop Drawings</div>
+          <div class="project-desc">Detailed shop drawings for a high-end residential millwork project in Poland, including cabinet elevations, section views, and material take-offs.</div>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-thumb project-thumb-5">
+          <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+          <span class="project-thumb-label">Automation CAD</span>
+        </div>
+        <div class="project-body">
+          <div class="project-title">DriveWorks Automation Workflow</div>
+          <div class="project-desc">Built a rules-based SOLIDWORKS DriveWorks automation solution for a manufacturer, reducing design time per variant from hours to minutes.</div>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-thumb project-thumb-6">
+          <svg viewBox="0 0 24 24"><path d="M2 20h20M4 20V10l8-6 8 6v10"/></svg>
+          <span class="project-thumb-label">Structural</span>
+        </div>
+        <div class="project-body">
+          <div class="project-title">Structural Staircase Detailing</div>
+          <div class="project-desc">Full design and detailing package for a custom spiral staircase, including structural steel members, connection details, and fabrication drawings.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing">
+  <div class="section-inner">
+    <div class="section-header">
+      <span class="section-kicker">Transparent rates</span>
+      <h2 class="section-title">Pricing</h2>
+    </div>
+    <div class="pricing-grid">
+
+      <div class="pricing-card">
+        <span class="pricing-badge">Standard</span>
+        <div class="pricing-name">Modeling &amp; Drafting</div>
+        <div class="pricing-price"><sup>$</sup>3,000</div>
+        <ul class="pricing-features">
+          <li class="pricing-feature">3D modeling &amp; assemblies</li>
+          <li class="pricing-feature">Engineering drawings &amp; GD&T</li>
+          <li class="pricing-feature">BOMs &amp; assembly drawings</li>
+          <li class="pricing-feature">Fabrication &amp; sheet metal design</li>
+          <li class="pricing-feature">Reverse engineering</li>
+          <li class="pricing-feature">Signboard &amp; staircase design</li>
+        </ul>
+        <p class="pricing-note">Per project · Custom scopes available</p>
+      </div>
+
+      <div class="pricing-card featured">
+        <span class="pricing-badge">Advanced</span>
+        <div class="pricing-name">Millwork, DriveWorks &amp; Automation</div>
+        <div class="pricing-price"><sup>$</sup>4,000</div>
+        <ul class="pricing-features">
+          <li class="pricing-feature">Custom millwork shop drawings</li>
+          <li class="pricing-feature">DriveWorks rules-based automation</li>
+          <li class="pricing-feature">CAD configuration automation</li>
+          <li class="pricing-feature">Estimation &amp; material take-offs</li>
+          <li class="pricing-feature">All standard tier services included</li>
+        </ul>
+        <p class="pricing-note">Per project · Retainer arrangements available</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-inner">
+    <div class="contact-grid">
+      <div>
+        <span class="section-kicker">Let's work together</span>
+        <h2 class="section-title">Get in Touch</h2>
+        <p class="contact-desc">Whether you need support on a single project or are looking for a reliable long-term design partner, I'd love to hear from you.</p>
+        <a class="contact-email" href="mailto:shahricky845@gmail.com">shahricky845@gmail.com</a>
+        <div class="contact-tags">
+          <span class="contact-tag">Freelance</span>
+          <span class="contact-tag">Contract</span>
+          <span class="contact-tag">Full-time Remote</span>
+          <span class="contact-tag">US · EU · Global</span>
+        </div>
+      </div>
+      <div class="contact-card">
+        <div class="contact-card-title">Quick Info</div>
+        <div class="contact-row">
+          <span class="contact-row-label">Name</span>
+          <span class="contact-row-val">Ricky Shah</span>
+        </div>
+        <div class="contact-row">
+          <span class="contact-row-label">Role</span>
+          <span class="contact-row-val">Senior Mechanical Design Engineer</span>
+        </div>
+        <div class="contact-row">
+          <span class="contact-row-label">Experience</span>
+          <span class="contact-row-val">8+ years</span>
+        </div>
+        <div class="contact-row">
+          <span class="contact-row-label">Certification</span>
+          <span class="contact-row-val">Certified SOLIDWORKS User</span>
+        </div>
+        <div class="contact-row">
+          <span class="contact-row-label">Clients</span>
+          <span class="contact-row-val">US, Germany, Poland &amp; more</span>
+        </div>
+        <div class="contact-row">
+          <span class="contact-row-label">Email</span>
+          <span class="contact-row-val" style="color: #5DCAA5;">shahricky845@gmail.com</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-copy">© 2026 Ricky Shah. All rights reserved.</span>
+  <span class="footer-badge">Certified SOLIDWORKS User</span>
+</footer>
+
+</body>
+</html>
